@@ -7,6 +7,9 @@ from menu_engranaje import dibujar_menu
 from inicio import dibujar_inicio
 from tablero import tablero_dibujo
 from tablero_preguntas import dibujar_tablero_preguntas
+from input_nombre import dibujar_input
+
+
 
 tablero = [
     0, 1, 0, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 2, 1, 1, 2, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 0, 0]
@@ -41,7 +44,8 @@ def manejar_eventos():
     resultados = {
         "mouse_click": (0, 0),
         "salir": False,
-        "tiempo": False
+        "tiempo": False,
+        "teclado": False
     }
 
 
@@ -53,7 +57,13 @@ def manejar_eventos():
             resultados["mouse_click"] = evento.pos
 
         elif evento.type == pygame.KEYDOWN:
-            resultados["tecla"] = evento.key
+            if evento.key == pygame.K_BACKSPACE:
+                resultados["teclado"] = "eliminar"
+            else:
+                resultados["teclado"] = evento.unicode 
+
+
+
 
         elif evento.type == timer_segundos:
             resultados["tiempo"] = True
@@ -91,13 +101,15 @@ def game_loop():
     clock = pygame.time.Clock()
 
     estado_juego = {
-        "contador": 0
+        "contador": 0,
+        "nombre": ""
     }
 
     pantalla_actual = "inicio"
     
     pantallas = {
         "inicio": dibujar_inicio,
+        "input":  dibujar_input,
         "tablero": tablero_dibujo,
         "menu": dibujar_menu,
         "preguntas": dibujar_tablero_preguntas
@@ -117,29 +129,35 @@ def game_loop():
     run = True
     while run:
 
-        manejar_salida = manejar_eventos()
+        manejar_salida_eventos = manejar_eventos()
 
-        if manejar_salida["salir"] == True:
+        if manejar_salida_eventos["salir"] == True:
             pygame.quit()
 
-        boton_clickeado = manejar_salida["mouse_click"]
+        boton_clickeado = manejar_salida_eventos["mouse_click"]
 
 
         verificador_botones = elegir_botones_mouse(boton_clickeado, lista_botones, pantalla)
         
 
-        if pantalla_actual != "preguntas":
+        if pantalla_actual != "preguntas" and pantalla_actual != "input":
             pantalla_actual = pantallas[pantalla_actual](pantalla, verificador_botones, pantalla_actual)
             if estado_juego["contador"] == 15:
                 estado_juego["contador"] = 0 
-        else:
+        elif pantalla_actual == "preguntas":
             pantalla_actual = pantallas[pantalla_actual](pantalla, verificador_botones, pantalla_actual, estado_juego["contador"])
-            if manejar_salida["tiempo"]:
+            if manejar_salida_eventos["tiempo"]:
                 if estado_juego["contador"] <= 15:
                     estado_juego["contador"] += 1
                     print(estado_juego["contador"])
+        elif pantalla_actual == "input":
+            pantalla_actual = pantallas[pantalla_actual](pantalla, verificador_botones, pantalla_actual, manejar_salida_eventos, estado_juego)
+            print(estado_juego["nombre"])
 
-    
+
+
+ 
+
 
 
         pygame.display.flip()

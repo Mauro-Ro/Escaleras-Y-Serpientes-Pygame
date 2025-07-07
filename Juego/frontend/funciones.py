@@ -97,3 +97,19 @@ def boton_preguntas_imagen():
     return pygame.image.load("models/preguntas/botones_sombras/preguntas.png")
 def boton_preguntas_sin_sombra_imagen():
     return pygame.image.load("models/preguntas/botones_sombras/preguntas_sin_sombra.png")
+
+
+
+
+
+# -----------------------------------------------------------------------------------------------
+# Input y sus botones
+
+def input_imagen():
+    return pygame.image.load("models/input/input.png")
+
+def boton_input_sin_sombra_img():
+    return pygame.image.load("models/input/botones_sombra/comenzar_sin_sombra.png")
+
+def boton_input_img():
+    return pygame.image.load("models/input/botones_sombra/comenzar.png")

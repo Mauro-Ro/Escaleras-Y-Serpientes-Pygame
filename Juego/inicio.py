@@ -14,7 +14,7 @@ def dibujar_inicio(pantalla, verficador_botones, pantalla_actual):
 
     if verficador_botones(0,0):
         pantalla.blit(comenzar_sin_sombra_imagen(),(0, 10))
-        pantalla_actual = "tablero"
+        pantalla_actual = "input"
     else:
         pantalla.blit(comenzar_imagen(),(0,0))
 
