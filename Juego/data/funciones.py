@@ -1,8 +1,10 @@
 import random
-from preguntas.preguntas import preguntas
+from data.preguntas import preguntas
 
 
 lista_preguntas = list(range(15))
+
+# lista_preguntas = [1, 2, 8, 0]
 
 """
 Módulo de funciones para manejar preguntas, respuestas y flujo de juego.
@@ -44,13 +46,10 @@ def buscar_pregunta(num: int):
     valor = preguntas[num]
     lista_preguntas = [
         valor["pregunta"], valor["respuesta_a"],
-        valor["respuesta_b"], valor["respuesta_c"]
+        valor["respuesta_b"], valor["respuesta_c"],
+        valor["respuesta_correcta"]
     ]
 
-    # print(valor['pregunta'])
-    # print("a."+valor['respuesta_a'])
-    # print("b."+valor['respuesta_b'])
-    # print("c."+valor['respuesta_c'])
     return lista_preguntas
 
 def buscar_respuesta(num: int)->str:
