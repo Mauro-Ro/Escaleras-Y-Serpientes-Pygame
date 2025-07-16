@@ -2,14 +2,16 @@ import pygame
 
 from frontend.variables import (
     menu_imagen,
-    engranaje_imagen, engranaje_sin_sombra_imagen,
-    reanudar_imagen, reanudar_sin_sombra_imagen,
-    puntaje_imagen, puntaje_sin_sombra_imagen,
-    salir_imagen, salir_sin_sombra_imagen
+    reanudar_imagen,
+    reanudar_sin_sombra_imagen,
+    puntaje_imagen,
+    puntaje_sin_sombra_imagen,
+    salir_imagen,
+    salir_sin_sombra_imagen,
 )
 
 
-def dibujar_menu(pantalla, verificador_botones, pantalla_actual, estado_juego):
+def dibujar_menu(pantalla, verificador_botones, pantalla_actual)->str:
 
     pantalla.blit(menu_imagen, (7, 0))
 
@@ -22,7 +24,7 @@ def dibujar_menu(pantalla, verificador_botones, pantalla_actual, estado_juego):
     if verificador_botones(2, 1):
         pantalla.blit(puntaje_sin_sombra_imagen, (0, 10))
         pantalla_actual = "puntaje"
-        
+
     else:
         pantalla.blit(puntaje_imagen, (0, 0))
 

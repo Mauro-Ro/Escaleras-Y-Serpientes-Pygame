@@ -4,8 +4,6 @@ from data.preguntas import preguntas
 
 lista_preguntas = list(range(15))
 
-# lista_preguntas = [1, 2, 8, 0]
-
 """
 Módulo de funciones para manejar preguntas, respuestas y flujo de juego.
 
@@ -14,7 +12,7 @@ elegir preguntas al azar sin repetir, y controlar si el usuario desea continuar 
 """
 
 
-def numero_random(lista: list)->int:
+def numero_random(lista: list) -> int:
     """
     Elige un número aleatorio de una lista y lo elimina de la misma.
 
@@ -26,12 +24,13 @@ def numero_random(lista: list)->int:
 
     Returns:
         int: El número seleccionado aleatoriamente de la lista.
-    """  
+    """
     elegido = random.choice(lista)
 
     lista.remove(elegido)
 
     return elegido
+
 
 def buscar_pregunta(num: int):
     """
@@ -42,17 +41,20 @@ def buscar_pregunta(num: int):
 
     Args:
         num (int): Índice de la pregunta dentro de la lista `preguntas`.
-    """ 
+    """
     valor = preguntas[num]
     lista_preguntas = [
-        valor["pregunta"], valor["respuesta_a"],
-        valor["respuesta_b"], valor["respuesta_c"],
-        valor["respuesta_correcta"]
+        valor["pregunta"],
+        valor["respuesta_a"],
+        valor["respuesta_b"],
+        valor["respuesta_c"],
+        valor["respuesta_correcta"],
     ]
 
     return lista_preguntas
 
-def buscar_respuesta(num: int)->str:
+
+def buscar_respuesta(num: int) -> str:
     """
     Busca y devuelve la respuesta correcta de una pregunta según su índice.
 
@@ -71,7 +73,8 @@ def buscar_respuesta(num: int)->str:
     respuesta = valor["respuesta_correcta"]
     return respuesta
 
-def validar_respuesta(num: int)->bool:
+
+def validar_respuesta(num: int) -> bool:
     """
     Valida si la respuesta ingresada por el usuario coincide con la respuesta correcta.
 
@@ -84,7 +87,7 @@ def validar_respuesta(num: int)->bool:
 
     Returns:
         bool: True si la respuesta es correcta, False si es incorrecta o inválida.
-    """  
+    """
     respuesta = True
     run = True
     while run:
@@ -101,7 +104,8 @@ def validar_respuesta(num: int)->bool:
 
     return respuesta
 
-def validar_seguir_jugando(entrada:str, error: str)->bool:
+
+def validar_seguir_jugando(entrada: str, error: str) -> bool:
     """
     Pide al usuario que ingrese 'si' o 'no' y valida la respuesta.
 
@@ -114,7 +118,7 @@ def validar_seguir_jugando(entrada:str, error: str)->bool:
 
     Returns:
         bool: True si el usuario ingresó 'si', False si ingresó 'no'.
-    """ 
+    """
     correr = True
     seguir_jugando = True
     while correr:
@@ -131,17 +135,18 @@ def validar_seguir_jugando(entrada:str, error: str)->bool:
 
     return seguir_jugando
 
+
 def mostrar_tablero(posicion: int, tablero: list):
     """Muestra el tablero y donde se ubica el jugador con una "J"
 
     Args:
         posicion (int): Posicion en la que esta el jugador
         tablero (list): La lista del tablero para convertirla en una lista con guiones
-    """    
+    """
     linea = ""
     for i in range(len(tablero)):
         if i == posicion:
             linea += "J "
-        else: 
+        else:
             linea += "- "
     print(f"Tablero:\n{linea}\n")
